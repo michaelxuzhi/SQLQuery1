@@ -1,0 +1,58 @@
+CREATE VIEW ST1
+AS
+SELECT *
+FROM Student
+WHERE Dno='CS';
+
+CREATE VIEW ST2(Sno,Sname,Grade)
+AS
+SELECT Student.Sno,Sname,Grade
+from Student,SC
+WHERE Dno='CS' AND Student.Sno=SC.Sno AND SC.Cno='2';
+
+CREATE VIEW ST3
+AS
+SELECT Sno,Sname,Grade
+from ST2
+WHERE Grade<60;
+
+create view ST4(Sno,Sname,Sbirth)
+AS
+select Sno,Sname,YEAR(GETDATE())-Sage
+from Student;
+
+create view ST5(Sno,Gavg)
+as
+select Sno,AVG(Grade)
+from SC
+group by Sno;
+
+create view ST6
+as
+select Student.Sno,Sname,Dname,Cname,Grade
+from Student,Department,SC,Course
+where Student.Dno=Department.Dno and Student.Sno=SC.Sno and SC.Cno=Course.Cno;
+
+drop view ST4;
+
+update ST1
+SET Sname='Alice'
+where Sno='201215125';
+
+insert into ST1
+values('201531001','Tom');
+
+delete 
+from ST1
+where Sno='201215125';
+
+select * 
+from ST1
+where Ssex='ÄÐ';
+
+select *
+from ST1,SC
+where ST1.Sno=SC.Sno and SC.Cno='1';
+
+
+

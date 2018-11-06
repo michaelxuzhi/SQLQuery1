@@ -1,0 +1,44 @@
+INSERT INTO Student
+VALUES('201215124','陈冬','男',18,'IS');
+
+INSERT INTO SC VALUES('2015124','1',77);
+
+USE StudScore_DB
+CREATE TABLE StudentBAK1
+(Sno CHAR(9) PRIMARY KEY,
+Sname VARCHAR(8) NOT NULL
+);
+INSERT INTO StudentBAK1
+SELECT Sno,Sname FROM Student WHERE Dno='IS';
+
+UPDATE Student
+SET Sage=21
+WHERE Sno='201215121';
+
+UPDATE Student
+SET Ssex='女',Sage=18
+WHERE Sname='王立';
+
+UPDATE SC
+SET Grade=Grade+2
+WHERE Cno=(SELECT Cno FROM Course WHERE Cname='数据库');
+
+UPDATE SC
+SET Grade=0
+WHERE 'CS'=
+(SELECT Dno
+FROM Student
+WHERE Student.Sno=SC.Sno
+);
+
+DELETE FROM Student
+WHERE Sno='201215128';
+
+DELETE FROM SC;
+
+DELETE FROM SC
+WHERE 'CS'=
+(SELECT Dno
+FROM Student
+WHERE Student.Sno=SC.Sno
+);

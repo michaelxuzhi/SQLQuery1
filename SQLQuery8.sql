@@ -1,0 +1,4 @@
+drop view ST4;
+
+
+
